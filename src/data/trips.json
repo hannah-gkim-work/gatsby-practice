@@ -1,26 +1,26 @@
 [
   {
-    "img": "../assets/images/",
-    "alt": "Tian Tan Buddha",
-    "name": "Tian Tan Buddha",
+    "img": "../assets/images/france.jpg",
+    "alt": "Paris",
+    "name": "Paris",
     "button": "View Destination"
   },
   {
-    "img": "../assets/images/",
-    "alt": "Tian Tan Buddha",
-    "name": "Tian Tan Buddha",
+    "img": "../assets/images/japan.jpg",
+    "alt": "Tokyo",
+    "name": "Tokyo",
     "button": "View Destination"
   },
   {
-    "img": "../assets/images/",
-    "alt": "Tian Tan Buddha",
-    "name": "Tian Tan Buddha",
+    "img": "../assets/images//korea.jpg",
+    "alt": "Seoul",
+    "name": "Seoul",
     "button": "View Destination"
   },
   {
-    "img": "../assets/images/",
-    "alt": "Tian Tan Buddha",
-    "name": "Tian Tan Buddha",
+    "img": "../assets/images/spain.jpg",
+    "alt": "Barcelona",
+    "name": "Barcelona",
     "button": "View Destination"
   }
 ]
