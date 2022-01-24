@@ -5,7 +5,7 @@ import { GatsbyImage, getImage, withArtDirection } from "gatsby-plugin-image"
 import { useStaticQuery, graphql } from "gatsby"
 import { Button } from "./Button"
 import { ImLocation } from "react-icons/im"
-export const Trips = () => {
+export const Trips = ({ heading }) => {
   const data = useStaticQuery(graphql`
     query TripQuery {
       allTripsJson {
@@ -57,28 +57,41 @@ export const Trips = () => {
             src={item.node.img.childImageSharp.fluid.src}
             fluid={item.node.img.childImageSharp.fluid}
           /> */}
-          {console.log(item.node.img.childImageSharp)}
-          <GatsbyImage
-            // image={item.node.img.childImageSharp.gatsbyImageData}
-            image={withArtDirection(
-              getImage(item.node.img.childImageSharp.gatsbyImageData),
-              [
-                {
-                  media: "(max-width: 1024px)",
-                  image: getImage(
-                    item.node.img.childImageSharp.gatsbyImageData
-                  ),
-                },
-              ]
-            )}
-            alt={item.node.alt}
-          />
+          <ProductImg>
+            <GatsbyImage
+              // image={item.node.img.childImageSharp.gatsbyImageData}
+              image={withArtDirection(
+                getImage(item.node.img.childImageSharp.gatsbyImageData),
+                [
+                  {
+                    // media: "(min-width: 100px)",
+                    image: getImage(
+                      item.node.img.childImageSharp.gatsbyImageData
+                    ),
+                  },
+                ]
+              )}
+              alt={item.node.alt}
+            />
+          </ProductImg>
+
           <ProductInfo>
             <TextWrap>
               <ImLocation />
               <ProductTitle>{item.node.name}</ProductTitle>
             </TextWrap>
-            <Button to="/trips">{item.node.button}</Button>
+            <Button
+              primary="true"
+              round="true"
+              css={`
+                position: absolute;
+                top: 420px;
+                font-size: 14px;
+              `}
+              to="/trips"
+            >
+              {item.node.button}
+            </Button>
           </ProductInfo>
         </ProductCard>
       )
@@ -88,7 +101,7 @@ export const Trips = () => {
 
   return (
     <ProductsContainer>
-      <ProductsHeading>Heading</ProductsHeading>
+      <ProductsHeading>{heading}</ProductsHeading>
       <ProductWrapper>{getTrips(data)}</ProductWrapper>
     </ProductsContainer>
   )
@@ -97,7 +110,7 @@ export const Trips = () => {
 const ProductsContainer = styled.div`
   min-height: 100vh;
   padding: 5rem calc((100vw - 1300px) / 2);
-  background: pink;
+  /* background: pink; */
   color: #fff;
 `
 const ProductsHeading = styled.div`
@@ -110,9 +123,11 @@ const ProductsHeading = styled.div`
 const ProductWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  /* grid-template-columns: repeat(1, 1fr); */
   grid-gap: 10px;
   justify-items: center;
   padding: 0 2rem;
+  border: blue 2px solid;
 
   @media screen and(max-width:1200px) {
     grid-template-columns: 1fr 1fr;
@@ -128,8 +143,39 @@ const ProductCard = styled.div`
   position: relative;
   border-radius: 10px;
   transition: 0.2s ease;
+  border: solid 2px red;
+  overflow: hidden;
 `
+const ProductImg = styled.div`
+  height: 100%;
+  max-width: 100%;
+  position: relative;
+  border-radius: 10px;
+  filter: brightness(70%);
+  transition: 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
 
-const ProductInfo = styled.div``
-const TextWrap = styled.div``
-const ProductTitle = styled.div``
+  &:hover {
+    filter: brightness(100%);
+  }
+`
+const ProductInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 2rem;
+
+  @media screen and (max-width: 280px) {
+    padding: 0 1rem;
+  }
+`
+const TextWrap = styled.div`
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 375px;
+`
+const ProductTitle = styled.div`
+  font-weight: 400;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+`
